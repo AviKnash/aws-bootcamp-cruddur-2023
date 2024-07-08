@@ -4,7 +4,7 @@ from aws_xray_sdk.core import xray_recorder
 class UserActivities:
   @staticmethod
   def run(user_handle):
-      segment = xray_recorder.begin_segment('user_activities')
+      # segment = xray_recorder.begin_segment('user_activities')
       model = {
         'errors': None,
         'data': None
@@ -25,11 +25,11 @@ class UserActivities:
         model['data'] = results
 
       # X_RAY ----------------------------------
-      metadata = {
-        "now": now.isoformat(),
-        "results-size": len(model['data']) if model['data'] else 0
-      }
-      subsegment = xray_recorder.begin_subsegment('mock-data')
-      subsegment.put_metadata('key', metadata, 'namespace')
+      # metadata = {
+      #   "now": now.isoformat(),
+      #   "results-size": len(model['data']) if model['data'] else 0
+      # }
+      # subsegment = xray_recorder.begin_subsegment('mock-data')
+      # subsegment.put_metadata('key', metadata, 'namespace')
 
       return model

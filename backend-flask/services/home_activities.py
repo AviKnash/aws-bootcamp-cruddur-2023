@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta, timezone
 class HomeActivities:
-  def run(logger):
+  def run():
     now = datetime.now(timezone.utc).astimezone()
-    logger.info("HELLO INSIDE HOME")
+    # logger.info("HELLO INSIDE HOME")
     results = [{
       'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
       'handle':  'Andrew Brown',
-      'message': 'Cloud is fun!',
+      'message': 'Cloud is ggngbgbgbgggggggggggggg!',
       'created_at': (now - timedelta(days=2)).isoformat(),
       'expires_at': (now + timedelta(days=5)).isoformat(),
       'likes_count': 5,

@@ -17,13 +17,13 @@ from services.show_activity import *
 from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
 
 #HoneyComb -----------------------------------------------------
-from opentelemetry import trace
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.sdk.trace.export import SimpleSpanProcessor,ConsoleSpanExporter
+# from opentelemetry import trace
+# from opentelemetry.instrumentation.flask import FlaskInstrumentor
+# from opentelemetry.instrumentation.requests import RequestsInstrumentor
+# from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+# from opentelemetry.sdk.trace import TracerProvider
+# from opentelemetry.sdk.trace.export import BatchSpanProcessor
+# from opentelemetry.sdk.trace.export import SimpleSpanProcessor,ConsoleSpanExporter
 
 #X- RAY =------------------------------------------------------
 # from aws_xray_sdk.core import xray_recorder
@@ -52,14 +52,14 @@ from opentelemetry.sdk.trace.export import SimpleSpanProcessor,ConsoleSpanExport
 # LOGGER.info("some message")
 
 # HoneyComb
-provider = TracerProvider()
-simple_processor = BatchSpanProcessor(ConsoleSpanExporter())
-provider.add_span_processor(simple_processor)
+# provider = TracerProvider()
+# simple_processor = BatchSpanProcessor(ConsoleSpanExporter())
+# provider.add_span_processor(simple_processor)
 
-processor = SimpleSpanProcessor(OTLPSpanExporter())
-provider.add_span_processor(processor)
-trace.set_tracer_provider(provider)
-tracer = trace.get_tracer(__name__)
+# processor = SimpleSpanProcessor(OTLPSpanExporter())
+# provider.add_span_processor(processor)
+# trace.set_tracer_provider(provider)
+# tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
 
@@ -93,8 +93,8 @@ cognito_jwt_token = CognitoJwtToken(
 # XRayMiddleware(app, xray_recorder)
 
 #HoneyComb-------------------------------------
-FlaskInstrumentor().instrument_app(app)
-RequestsInstrumentor().instrument()
+# FlaskInstrumentor().instrument_app(app)
+# RequestsInstrumentor().instrument()
 
 
 frontend = os.getenv('FRONTEND_URL')

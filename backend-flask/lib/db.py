@@ -25,7 +25,11 @@ class Db:
 
   def init_pool(self):
     connection_url = os.getenv("CONNECTION_URL")
+    print("URLLLLLLLLLLLLLLLLLLLLLL_____________________")
+    print(connection_url)
     self.pool = ConnectionPool(connection_url)
+    print("OPOOOOOOOOOOOOOOOOOOOOOL_________________")
+    print(self.pool)
   # we want to commit data such as an insert
   # be sure to check for RETURNING in all uppercases
   def print_params(self,params):

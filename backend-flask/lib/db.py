@@ -24,9 +24,7 @@ class Db:
     return template_content
 
   def init_pool(self):
-    print("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE_______________________")
     connection_url = os.getenv("CONNECTION_URL")
-    print(connection_url)
     self.pool = ConnectionPool(connection_url)
   # we want to commit data such as an insert
   # be sure to check for RETURNING in all uppercases
@@ -85,7 +83,7 @@ class Db:
         else:
           return json[0]
   def query_value(self,sql,params={}):
-    self.print_sql('value',sql,params={})
+    self.print_sql('value',sql,params)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(sql,params)

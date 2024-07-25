@@ -125,14 +125,17 @@ def data_message_groups():
   access_token = extract_access_token(request.headers)
   try:
     claims = cognito_jwt_token.verify(access_token)
+    # authenicatied request
+    app.logger.debug("authenicated")
+    app.logger.debug(claims)
     cognito_user_id = claims['sub']
     model = MessageGroups.run(cognito_user_id=cognito_user_id)
     if model['errors'] is not None:
       return model['errors'], 422
     else:
       return model['data'], 200
-
   except TokenVerifyError as e:
+    # unauthenicatied request
     app.logger.debug(e)
     return {}, 401
 
@@ -164,15 +167,20 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
-    access_token = extract_access_token(request.headers)
-    try:
-        claims = cognito_jwt_token.verify(access_token)
-        data = HomeActivities.run(cognito_user_id=claims['username'])
-        
-    except TokenVerifyError as e:
-        app.logger.debug('unauthenticated')
-        data = HomeActivities.run()
-    return data, 200
+  access_token = extract_access_token(request.headers)
+  try:
+    claims = cognito_jwt_token.verify(access_token)
+    # authenicatied request
+    app.logger.debug("authenicated")
+    app.logger.debug(claims)
+    app.logger.debug(claims['username'])
+    data = HomeActivities.run(cognito_user_id=claims['username'])
+  except TokenVerifyError as e:
+    # unauthenicatied request
+    app.logger.debug(e)
+    app.logger.debug("unauthenicated")
+    data = HomeActivities.run()
+  return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
 def data_notifications():

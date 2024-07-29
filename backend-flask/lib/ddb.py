@@ -94,6 +94,7 @@ class Ddb:
       Item=record
     )
     # print the response
+    print("RESPOSE")
     print(response)
     return {
       'message_group_uuid': message_group_uuid,

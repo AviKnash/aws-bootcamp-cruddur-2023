@@ -8,7 +8,7 @@ import MessagesFeed from '../components/MessageFeed';
 import MessagesForm from '../components/MessageForm';
 import checkAuth from '../lib/CheckAuth';
 
-export default function MessageGroupPage() {
+export default function MessageGroupNewPage() {
   const [otherUser, setOtherUser] = React.useState([]);
   const [messageGroups, setMessageGroups] = React.useState([]);
   const [messages, setMessages] = React.useState([]);
@@ -59,7 +59,7 @@ export default function MessageGroupPage() {
     //prevents double call
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-
+  
     loadMessageGroupsData();
     loadUserShortData();
     checkAuth(setUser);
